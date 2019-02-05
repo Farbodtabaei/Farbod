@@ -1,0 +1,44 @@
+// exterior modeling cost calculation:
+
+// get facade area:
+document.getElementById("mdl-ext-facade-area").onchange = function() {MdlPrcCalc(); allPrc();  rangenumber();};
+// get project style:
+document.getElementById("prjstmdl").onchange = function() {MdlPrcCalc(); allPrc(); rangenumber();};
+// get project function:
+document.getElementById("prjfnmdl").onchange = function() {MdlPrcCalc(); allPrc(); rangenumber();};
+
+// calculate modeling price:
+	function MdlPrcCalc() {
+
+	var projectStyle = document.getElementById('prjstmdl').value,
+			projectFunction = document.getElementById('prjfnmdl').value,
+			facadeArea = document.getElementById('mdl-ext-facade-area').value,
+			Totalextmdl,
+			Totalintmdl;
+			
+	
+		if (facadeArea == 0) {
+
+			Totalextmdl = 0;
+
+		} else if (facadeArea > 0 && facadeArea <= 1200) {
+
+			Totalextmdl = parseInt((200000 + 166.7 * facadeArea) * projectStyle * projectFunction);
+
+		} else if (facadeArea > 1200 && facadeArea <= 4000) {
+
+			Totalextmdl = parseInt((400000 + 35.71 * facadeArea) * projectStyle * projectFunction);
+
+		} else if (facadeArea > 4000 && facadeArea <= 10000) {
+
+			Totalextmdl = parseInt((500000 + 16.66 * facadeArea) * projectStyle * projectFunction);
+
+		} else {
+
+			Totalextmdl = 700000* projectStyle * projectFunction;
+
+		}
+	
+		document.getElementById('model-ext-price').value = Math.ceil(Totalextmdl/1000)*1000;
+    
+		//end of exterior modeling cost calculation.
